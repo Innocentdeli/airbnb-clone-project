@@ -147,3 +147,88 @@ Features: Post and manage reviews for properties.
 7. Database Optimizations
 Indexing: Implement indexes for fast retrieval of frequently accessed data.
 Caching: Use caching strategies to reduce database load and improve performance.
+
+
+API Security:
+1. Authentication
+
+What: Verifies that a user is who they claim to be (e.g., login using email/password, OTP, or social login).
+
+How:
+Secure password storage using bcrypt hashing
+Two-Factor Authentication (2FA) for hosts and admins
+OAuth/Social logins (Google, Facebook, etc.)
+Email verification on sign-up
+Why It Matters:
+Prevents unauthorized access to user accounts.
+Essential for protecting personal data, bookings, and property listings.
+2. Authorization
+
+What: Controls what authenticated users are allowed to do.
+
+How:
+Role-based access control (RBAC) (e.g., guest, host, admin)
+Middleware to restrict actions like deleting properties to only the owner or admins
+Why It Matters:
+Prevents privilege escalation (e.g., a guest modifying another host’s property).
+Ensures users only perform actions allowed for their role.
+3. Rate Limiting
+
+What: Restricts how often users can make requests to the API.
+
+How:
+Custom rate limits for login, search, and booking endpoints
+Why It Matters:
+
+Protects against brute force attacks and abuse (e.g., repeated login attempts)
+Reduces risk of Denial-of-Service (DoS) attacks
+4. Input Validation & Sanitization
+
+What: Ensures that data submitted by users is clean and expected.
+
+How:
+Escape HTML in user inputs to prevent XSS
+Why It Matters:
+Prevents attacks such as Cross-Site Scripting (XSS), SQL Injection, etc.
+Ensures integrity of stored and displayed data
+5. Secure Payments
+
+What: Ensures payment transactions are processed safely and privately.
+
+How:
+Use of secure, PCI-DSS compliant providers (e.g., Stripe, PayPal)
+Tokenized payment methods
+HTTPS for all payment endpoints
+Why It Matters:
+Protects financial data and prevents fraud.
+Builds user trust when handling money-related transactions.
+6. Logging & Audit Trails
+
+What: Tracks actions within the system for later review or alerts.
+
+How:
+Logging sensitive actions (e.g., booking, payment, profile changes)
+Admin panel access logs
+Why It Matters:
+Helps investigate suspicious activity or data breaches.
+Enables transparency and accountability.
+7. HTTPS Everywhere
+
+What: Ensures all communication between client and server is encrypted.
+
+How:
+Enforce HTTPS using web server config 
+Why It Matters:
+Prevents data interception during transmission (e.g., login credentials, card data).
+Ensures all user interactions are encrypted.
+8. Data Protection & Backups
+
+What: Protects against data loss or corruption.
+
+How:
+Regular automated backups
+Encrypted storage of sensitive information
+GDPR compliance for user data deletion/export
+Why It Matters:
+Ensures service continuity in case of failure or attack.
+Protects user privacy and builds legal compliance.
