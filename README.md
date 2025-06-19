@@ -48,3 +48,77 @@ Celery: For handling asynchronous tasks such as sending notifications or process
 Redis: Used for caching and session management.
 Docker: Containerization tool for consistent development and deployment environments.
 CI/CD Pipelines: Automated pipelines for testing and deploying code changes.
+
+
+Database Design:
+
+1. Users
+
+Represents: Guests and hosts on the platform.
+
+Key Fields:
+id: Unique identifier
+name: Full name
+email: Unique email address
+role: host or guest
+phone_number: Contact number
+password: Hashed password
+Relationships:
+A user can list many properties (if they are a host).
+A user can make many bookings (if they are a guest).
+A user can write many reviews.
+2. Properties
+
+Represents: Rental listings created by hosts.
+
+Key Fields:
+id: Unique identifier
+user_id: Foreign key to Users (the host)
+title: Name of the property
+description: Detailed description
+location: Address or coordinates
+price_per_night: Cost of staying per night
+Relationships:
+A property belongs to one user (host).
+A property has many bookings.
+A property has many reviews.
+3. Bookings
+
+Represents: Reservations made by guests for properties.
+
+Key Fields:
+id: Unique identifier
+user_id: Foreign key to Users (the guest)
+property_id: Foreign key to Properties
+start_date: Start of the stay
+end_date: End of the stay
+status: e.g., pending, confirmed, cancelled
+Relationships:
+A booking belongs to one user (guest).
+A booking belongs to one property.
+A booking has one payment.
+4. Reviews
+
+Represents: Feedback left by guests for a property.
+
+Key Fields:
+id: Unique identifier
+user_id: Foreign key to Users (reviewer)
+property_id: Foreign key to Properties
+rating: Numeric score (e.g., 1 to 5)
+comment: Text feedback
+Relationships:
+A review belongs to one user.
+A review belongs to one property.
+5. Payments
+
+Represents: Transactions for bookings.
+
+Key Fields:
+id: Unique identifier
+booking_id: Foreign key to Bookings
+amount: Total paid
+payment_method: e.g., card, paypal
+status: e.g., successful, failed, pending
+Relationships:
+A payment belongs to one booking.
